@@ -10,7 +10,8 @@ COPY . /app
 
 # Make the container accept traffic on port 3000 at runtime from other
 # containers or the host if also published
-EXPOSE 3000
+# bumped up one port cuz api and such
+EXPOSE 3001
 
 # Run this shell command at build time
 RUN npm install

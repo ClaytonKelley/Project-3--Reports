@@ -9,7 +9,6 @@ Darker Grey : #96A3AE
 greyish / blue : #425565
 BLK : #040707
 
-
 or
 
 Dark Blue : #425565
@@ -65,7 +64,7 @@ The app should have a responsive design that adapts to different screen sizes an
 
 53SOPS -  24 Hour Report Template
 ----------
-Sattelite - WGS 7
+Sattelite / Iron  - WGS 7
 Mission Number - PW1234-24-C1
 Team Name - Uss Washington
 Total Power Out (TPO) - 5Watts
