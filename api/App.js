@@ -118,6 +118,8 @@ app.get('/user_groups', (req, res) => {
 app.get('/report_data/:reportName/', (req, res) => {
     knex('report_data')
     .select('*')
+    .join('satellite_data', 'report_data.satellite_id', 'satellite_data.id')
+    .join('accounts_data', 'report_data.user_id', 'accounts_data.id')
     .whereRaw(`report_name ilike '%${req.params.reportName}%' or mission_number ilike '%${req.params.reportName}%'`)
     .then(data => {
       res.status(200).json(data)
