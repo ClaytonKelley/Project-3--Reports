@@ -1,6 +1,20 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "knex": "^3.1.0"
-  }
+    "knex": "^3.1.0",
+    "morgan": "^1.5.2",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.5"
+  },
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API for Reports app",
+  "main": "App.js",
+  "scripts": {
+    "start": "nodemon App.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
