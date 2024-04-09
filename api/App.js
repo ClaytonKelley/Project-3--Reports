@@ -57,9 +57,9 @@ app.get('/report_data', (req, res) => {
     })
 })
 
-//get all user groups
-app.get('/user_groups', (req, res) => {
-  knex('user_groups')
+//get all satellite data
+app.get('/satellite', (req, res) => {
+  knex('report_data')
     .select('*')
     .then(data => {
         res.status(200).json(data)
@@ -71,8 +71,34 @@ app.get('/user_groups', (req, res) => {
 })
 
 //get all satellite data
-app.get('/satellite', (req, res) => {
-  knex('report_data')
+app.get('/accounts_data', (req, res) => {
+  knex('accounts_data')
+    .select('*')
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(err => {
+      res.status(404).send({
+        message: "No data Found"})
+    })
+})
+
+//get all satellite data
+app.get('/units_data', (req, res) => {
+  knex('units_data')
+    .select('*')
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(err => {
+      res.status(404).send({
+        message: "No data Found"})
+    })
+})
+
+//get all user groups
+app.get('/user_groups', (req, res) => {
+  knex('user_groups')
     .select('*')
     .then(data => {
         res.status(200).json(data)
