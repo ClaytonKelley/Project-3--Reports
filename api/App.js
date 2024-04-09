@@ -45,9 +45,12 @@ app.get('/report_template', (req, res) => {
     })
 })
 
+//gets all report data
 app.get('/report_data', (req, res) => {
   knex('report_data')
     .select('*')
+    .join('satellite_data', 'report_data.satellite_id', 'satellite_data.id')
+    .join('accounts_data', 'report_data.user_id', 'accounts_data.id')
     .then(data => {
         res.status(200).json(data)
     })
@@ -56,6 +59,8 @@ app.get('/report_data', (req, res) => {
         message: "No data Found"})
     })
 })
+
+
 
 //get all satellite data
 app.get('/satellite', (req, res) => {
@@ -70,7 +75,7 @@ app.get('/satellite', (req, res) => {
     })
 })
 
-//get all satellite data
+//get all accounts
 app.get('/accounts_data', (req, res) => {
   knex('accounts_data')
     .select('*')
@@ -83,7 +88,7 @@ app.get('/accounts_data', (req, res) => {
     })
 })
 
-//get all satellite data
+//get all units
 app.get('/units_data', (req, res) => {
   knex('units_data')
     .select('*')

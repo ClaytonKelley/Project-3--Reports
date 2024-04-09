@@ -12,7 +12,9 @@ exports.up = function(knex) {
         table.string('email',40).notNullable(),
         table.string('CHOPs',3).notNullable(),
         table.integer('unit_id',20).notNullable(),
+        // table.foreign('unit_id').references('units_data.id'),
         table.integer('user_group_id',20).notNullable()
+        // table.foreign('user_group_id').references('user_groups.id')
     })
 };
 
