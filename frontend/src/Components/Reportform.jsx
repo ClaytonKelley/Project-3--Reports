@@ -12,7 +12,7 @@ export default function Reportform() {
   };
 
   const handleCloseForm = () => {
-    window.location.href = '/';
+    window.location.href = '/navbar';
   }
 
   return (
