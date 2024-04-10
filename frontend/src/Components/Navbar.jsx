@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import profileImage from '../assets/Avatar-Profile.png';
-
-
+import ReportContext from './ReportContext'
 
 export default function Navbar() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [reports, setReports] = useState([]);
+  const {reportList} = React.useContext(ReportContext)
 
   const toggleNavbar = () => {
     setIsExpanded(!isExpanded);
