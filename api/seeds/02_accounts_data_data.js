@@ -33,16 +33,16 @@ exports.seed = async function(knex) {
   ]);
 
   await knex('satellite_data').insert([
-    {satellite_name:'qrgeuw',iron:8764,orbital_pos:'45 E',norad_id:2453},
-    {satellite_name:'afsdq',iron:2453,orbital_pos:'34 W',norad_id:4768},
-    {satellite_name:'qerfq',iron:3563,orbital_pos:'34 E',norad_id:2534},
-    {satellite_name:'qgdgas',iron:6754,orbital_pos:'65 W',norad_id:1234},
-    {satellite_name:'qersfg',iron:8657,orbital_pos:'41 W',norad_id:5462},
-    {satellite_name:'ytwrsh',iron:3564,orbital_pos:'2 E',norad_id:5673},
-    {satellite_name:'qtjdtyj',iron:2453,orbital_pos:'34 W',norad_id:8465},
-    {satellite_name:'sgh6uw',iron:2456,orbital_pos:'12 W',norad_id:4374},
-    {satellite_name:'shwyw',iron:2434,orbital_pos:'35 E',norad_id:4567},
-    {satellite_name:'qrtgqr',iron:7578,orbital_pos:'32 E',norad_id:2456}
+    {satellite_name:'WGS 1',iron:8764,orbital_pos:'45 E',norad_id:2453},
+    {satellite_name:'WGS 2',iron:2453,orbital_pos:'34 W',norad_id:4768},
+    {satellite_name:'WGS 3',iron:3563,orbital_pos:'34 E',norad_id:2534},
+    {satellite_name:'WGS 4',iron:6754,orbital_pos:'65 W',norad_id:1234},
+    {satellite_name:'WGS 5',iron:8657,orbital_pos:'41 W',norad_id:5462},
+    {satellite_name:'WGS 6',iron:3564,orbital_pos:'2 E',norad_id:5673},
+    {satellite_name:'WGS 7',iron:2453,orbital_pos:'34 W',norad_id:8465},
+    {satellite_name:'WGS 8',iron:2456,orbital_pos:'12 W',norad_id:4374},
+    {satellite_name:'WGS 9',iron:2434,orbital_pos:'35 E',norad_id:4567},
+    {satellite_name:'WGS 10',iron:7578,orbital_pos:'32 E',norad_id:2456}
 
   ]);
 

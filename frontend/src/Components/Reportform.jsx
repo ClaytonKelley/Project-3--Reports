@@ -145,12 +145,14 @@ export default function Reportform() {
             />
           </div>
         </div>
+
         <div className="mt-4 flex justify-end gap-3"> {/* Container for buttons with margin-top for spacing and flex to align buttons */}
           {/* Submit Button */}
           <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Submit</button>
           {/* Cancel Button - Calls handleCloseForm to simulate a cancel action */}
           <button type="button" onClick={handleCloseForm} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Cancel</button>
         </div>
+        
       </form>
     </div>
   );
