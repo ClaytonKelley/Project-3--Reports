@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import profileImage from '../assets/Avatar-Profile.png';
 import ReportContext from './ReportContext'
 
 export default function Navbar() {
+  const navigate = useNavigate()
   const [isExpanded, setIsExpanded] = useState(false);
   const {reportList} = React.useContext(ReportContext)
 
   const toggleNavbar = () => {
     setIsExpanded(!isExpanded);
   };
-
-  useEffect(() => {
-    const fetchReports = async () => {
-      try {
-        const response = await fetch('our_api');
-  
-        if (response.ok) {
-          const reports = await response.json();
-          setReports(reports);
-        }
-      } catch (error) {
-        console.log('Failed to get reports', error);
-      }
-    };
-  
-    fetchReports();
-  }, []);
-
   return (
     <div className={`${isExpanded ? 'w-3/4' : 'w-1/3'} fixed left-0 top-0 bottom-0 bg-gray-800 text-white transition-width duration-300 overflow-hidden`}>
       <div className="flex flex-col items-center h-full">
@@ -49,12 +32,12 @@ export default function Navbar() {
 
         <div className='flex-grow overflow-y-auto w-full'>
           <ul className='flex flex-col items-center space-y-2 py-2'>
-            {reports.map((report, index) => (
-              <Link key={report.id} to={`/report/${report.id}`}>
-                <li className='bg-gray-500 rounded-xl w-3/4 h-20 text-center flex justify-center items-center cursor-pointer hover:bg-gray-400'>
-                  {report.mission || report.system || report.squadron}
-                </li>
-              </Link>
+            {reportList.map((report, index) => (
+              <li key={report.id} className='bg-gray-500 rounded-xl w-3/4 h-20 text-center flex justify-center items-center cursor-pointer hover:bg-gray-400' onClick={() => {
+                navigate(`/report/${report.id}`)
+              }}>
+                {isExpanded ? `wooo` : `${report.report_name} from ${report.date.toUpperCase()}`}
+              </li>
             ))}
           </ul>
         </div>

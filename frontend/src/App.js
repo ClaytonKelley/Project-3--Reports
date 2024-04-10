@@ -6,7 +6,7 @@ import './App.css';
 import ReportContext from './Components/ReportContext'
 import ProfileBuilder from './Components/ProfileBuilder';
 import Profile from './Routes/Profile';
-
+import Report from './Components/Report';
 
 function App() {
   const [reportList, setReportList] = React.useState([])
@@ -22,6 +22,8 @@ function App() {
           <Route path="/Reportform" element={<Reportform/>} />
           <Route path="/profilebuild" element={<ProfileBuilder/>} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/report/:id" element={<Report/>} />
+          
         </Routes>
     </ReportContext.Provider>
   );

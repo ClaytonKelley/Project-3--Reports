@@ -36,7 +36,7 @@ function Profile() {
 
   return (
     <div>
-        <ProfileBuilder />
+        <ProfileUser />
         {/* {hasProfile ? <ProfileUser /> : <ProfileBuilder />} */}
     </div>
   )
