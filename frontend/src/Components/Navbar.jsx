@@ -36,7 +36,7 @@ export default function Navbar() {
               <li key={report.id} className='bg-gray-500 rounded-xl w-3/4 h-20 text-center flex justify-center items-center cursor-pointer hover:bg-gray-400' onClick={() => {
                 navigate(`/report/${report.id}`)
               }}>
-                {isExpanded ? `wooo` : `${report.report_name} from ${report.date.toUpperCase()}`}
+                {isExpanded ? `${report.toString()}` : `${report.report_name} from ${report.date.toUpperCase()}`}
               </li>
             ))}
           </ul>

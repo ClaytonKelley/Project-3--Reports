@@ -13,7 +13,7 @@ export default function Report() {
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800 bg-opacity-50 text-white">
-        <button onClick={() => navigate('/')} className="absolute top-0 right-0 mt-2 mr-2 text-red-500 hover:text-red-700 font-bold text-xl">
+        <button onClick={() => navigate('/navbar')} className="absolute top-0 right-0 mt-2 mr-2 text-red-500 hover:text-red-700 font-bold text-xl">
         X
         </button>
       <div className="bg-gray-800 p-6 rounded-lg shadow-md">
