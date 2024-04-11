@@ -11,9 +11,8 @@ exports.up = function(knex) {
         table.string('team_name',40);
         table.string('mission_number',20);
         table.integer('satellite_id',5);
-        // table.foreign('satellite_id').references('satellite_data.id');
         table.string('tpo',20);
-        table.string('eb-no',10);
+        table.string('ebno',10);
         table.string('ber',15);
         table.string('latitude',20);
         table.string('longitude',20);
@@ -26,7 +25,6 @@ exports.up = function(knex) {
         table.string('hazcon',100);
         table.string('comments',255);
         table.integer('user_id',8);
-        // table.foreign('user_id').references('accounts_data.id')
       })
 };
 

@@ -13,7 +13,7 @@ exports.up = function(knex) {
     table.boolean('satellite_name').notNullable();
     table.boolean('norad_id').notNullable();
     table.boolean('tpo').notNullable();
-    table.boolean('eb-no').notNullable();
+    table.boolean('ebno').notNullable();
     table.boolean('ber').notNullable();
     table.boolean('location').notNullable();
     table.boolean('pim').notNullable();

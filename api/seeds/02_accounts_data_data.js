@@ -26,10 +26,10 @@ exports.seed = async function(knex) {
     {name: '2 SOPS', location: 'Schriever'}
   ]);
   await knex('accounts_data').insert([
-    {o_auth_id:70948245,username:'wghfw',rank:'O9',phone:4739203,email:'thewrf@spaceforce.mil',CHOPs:'PDE',unit_id:1,user_group_id:2},
-    {o_auth_id:213451234,username:'adfaq',rank:'E5',phone:34111234,email:'qwekrj@spaceforce.mil',CHOPs:'SKE',unit_id:1,user_group_id:1},
-    {o_auth_id:130987432,username:'ader',rank:'E4',phone:7893134,email:'qqqerd@spaceforce.mil',CHOPs:'WIF',unit_id:2,user_group_id:2},
-    {o_auth_id:2498703,username:'hw4h',rank:'O2',phone: 4981342,email:'qerdfq@spaceforce.mil',CHOPs:'POD',unit_id:3,user_group_id:1}
+    {oauth_sub:70948245,username:'wghfw',rank:'O9',phone:4739203,email:'thewrf@spaceforce.mil',chops:'PDE',unit_id:1,user_group_id:2},
+    {oauth_sub:213451234,username:'adfaq',rank:'E5',phone:34111234,email:'qwekrj@spaceforce.mil',chops:'SKE',unit_id:1,user_group_id:1},
+    {oauth_sub:130987432,username:'ader',rank:'E4',phone:7893134,email:'qqqerd@spaceforce.mil',chops:'WIF',unit_id:2,user_group_id:2},
+    {oauth_sub:2498703,username:'hw4h',rank:'O2',phone: 4981342,email:'qerdfq@spaceforce.mil',chops:'POD',unit_id:3,user_group_id:1}
   ]);
 
   await knex('satellite_data').insert([
@@ -48,13 +48,13 @@ exports.seed = async function(knex) {
 
   await knex('report_data').insert([
     /*WGS 24 Hour Report*/ {
-      report_name: "WGS 24 Hour Report",  // date: Autopopulated,
+      report_name: "WGS 24 Hour Report",
       unit: '53 SOPS',
       team_name: 'da boyz',
       mission_number: '2487ax3',
       satellite_id: 3,
       tpo: 1231123.87234,
-      'eb-no': 0.5,
+      ebno: 8.5,
       ber: 0.0012,
       latitude: '10.1 N',
       longitude: '10.1 E',
@@ -69,13 +69,13 @@ exports.seed = async function(knex) {
       user_id: 1,
     },
     /*CCS Report*/ {
-      report_name: "CCS log",  // date: Autopopulated,
+      report_name: "CCS log",
       unit: '4 EWS',
       team_name: 'da better boyz',
       mission_number: '32967',
       satellite_id: 5,
       tpo: null,
-      'eb-no': 0.5,
+      ebno: 7.2,
       ber: 0.0012,
       latitude: '58.9 N' ,
       longitude: '76.4 W',
@@ -90,13 +90,13 @@ exports.seed = async function(knex) {
     },
     /*GPS Report*/ {
 
-      report_name: "GPS log",  // date: Autopopulated,
+      report_name: "GPS log",
       unit: '2 SOPS',
       team_name: 'da sad boyz',
       mission_number: '420',
       satellite_id: 6,
       tpo: null,
-      'eb-no': null,
+      ebno: 6.5,
       ber: 0.0012,
       latitude: '87.3 N' ,
       longitude: '.021 E',
@@ -112,13 +112,13 @@ exports.seed = async function(knex) {
     },
     /*WGS 24 Hour Report*/ {
 
-      report_name: "WGS 24 Hour Report",  // date: Autopopulated,
+      report_name: "WGS 24 Hour Report",
       unit: '53 SOPS',
       team_name: 'da boyz',
       mission_number: '9283408',
       satellite_id: 2,
       tpo: 987435.3094123,
-      'eb-no': 0.4,
+      ebno: 6,
       ber: 0.0104,
       latitude: '64.2 N',
       longitude: '13.3 E',
@@ -134,13 +134,13 @@ exports.seed = async function(knex) {
     },
     /*CCS Report*/ {
 
-      report_name: "CCS log",  // date: Autopopulated,
+      report_name: "CCS log",
       unit: '4 EWS',
       team_name: 'da better boyz',
       mission_number: '32967',
       satellite_id: 5,
       tpo: null,
-      'eb-no': 0.5,
+      ebno: 15,
       ber: 0.0012,
       latitude: '58.9 N' ,
       longitude: '76.4 W',
@@ -154,13 +154,13 @@ exports.seed = async function(knex) {
       user_id: 3
     },
     /*GPS Report*/ {
-      report_name: "GPS log",  // date: Autopopulated,
+      report_name: "GPS log",
       unit: '2 SOPS',
       team_name: 'da sad boyz',
       mission_number: '420-1',
       satellite_id: 7,
       tpo: null,
-      'eb-no': null,
+      ebno: null,
       ber: 1,
       latitude: '69.3 N' ,
       longitude: '69.3 E',
