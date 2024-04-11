@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
@@ -8,6 +9,7 @@ import ProfileBuilder from "./Components/ProfileBuilder";
 import Profile from "./Routes/Profile";
 import Report from "./Components/Report";
 import Login from "./Components/Login";
+import Globe from './Components/Globe';
 
 function App() {
   const [reportList, setReportList] = useState([]);
@@ -93,8 +95,15 @@ function App() {
   }, []);
 
   return (
-    <ReportContext.Provider value={{ reportList, profile }}>
-      <Routes>
+
+    <ReportContext.Provider value={{ reportList, profile }}> 
+      {/* Globe component as background */}
+      <div className="globe-background">
+        <Globe/>
+      </div>
+      {/* Routes with a container for proper layering and styling */}
+      <div className="routes-container">
+       <Routes>
         <Route
           path="/"
           element={<Login LoginFunction={LoginSponsoredByGoogle} />}
@@ -111,6 +120,7 @@ function App() {
           navigate("/")
         )} */}
       </Routes>
+      </div>
     </ReportContext.Provider>
   );
 }

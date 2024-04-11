@@ -110,26 +110,58 @@ export default function Reportform() {
           </div>
         </div>
         <div className="mb-4 grid grid-cols-3 gap-4">
-          <div className="col-span-3 bg-gray-200 rounded-lg p-4">
-            <label htmlFor="bigInput1" className="block mb-2 font-bold text-gray-700">
-              Details:
-            </label>
-            <textarea
-              id="bigInput1"
-              name="bigInput1"
-              value={form.bigInput1 || ''}
-              onChange={handleChange}
-              rows={4} // Set the number of rows
-              placeholder={`
-              Total Power Out (TPO): 
-              Error to bit Noise Ratio: 
-              Location: 
-              Weather:
-              `}
-              className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
-              style={{ whiteSpace: 'pre-line', textAlign: 'left' }}
-            />
-          </div>
+        <div className="col-span-3 bg-gray-200 rounded-lg p-4">
+  <div className="font-bold text-gray-700 mb-4">Details:</div>
+
+  <label htmlFor="tpoInput" className="block mb-2 text-gray-700">
+    Total Power Out (TPO):
+  </label>
+  <input
+    id="tpoInput"
+    name="tpoInput"
+    value={form.tpoInput || ''}
+    onChange={handleChange}
+    placeholder="TPO"
+    className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+  />
+
+  <label htmlFor="ebNoInput" className="block mb-2 text-gray-700">
+    Error to Bit Noise Ratio (Eb/No):
+  </label>
+  <input
+    id="ebNoInput"
+    name="ebNoInput"
+    value={form.ebNoInput || ''}
+    onChange={handleChange}
+    placeholder="Eb/No"
+    className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+  />
+
+  <label htmlFor="locationInput" className="block mb-2 text-gray-700">
+    Location:
+  </label>
+  <input
+    id="locationInput"
+    name="locationInput"
+    value={form.locationInput || ''}
+    onChange={handleChange}
+    placeholder="Location"
+    className="w-full px-3 py-2 mb-4 text-gray-700 border rounded-lg focus:outline-none"
+  />
+
+  <label htmlFor="weatherInput" className="block mb-2 text-gray-700">
+    Weather:
+  </label>
+  <input
+    id="weatherInput"
+    name="weatherInput"
+    value={form.weatherInput || ''}
+    onChange={handleChange}
+    placeholder="Weather"
+    className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+  />
+</div>
+
           <div className="col-span-3 bg-gray-200 rounded-lg p-4">
             <label htmlFor="bigInput2" className="block mb-2 font-bold text-gray-700">
               Comments:
