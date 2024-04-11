@@ -7,8 +7,32 @@ export default function Login({ LoginFunction }) {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
+
         navigate('/Navbar');
     };
+
+ const syncAccountDetails = async (accountDetails) => {
+      const account = {
+        "oauth_sub" : accountDetails.sub,
+        "userName" : `${accountDetails.given_name}${accountDetails.family_name}${Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}`,
+        "email" : accountDetails.email,
+        "user_group_id" : 1
+      }
+
+      console.log(account)
+      try {
+          const response = await fetch("http://localhost:8080/accounts_data", {
+              method: "POST",
+              body: JSON.stringify(account),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+          });
+          console.log(response);
+      } catch (error) {
+          console.error(error);
+      }
+  };
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -17,7 +41,7 @@ export default function Login({ LoginFunction }) {
                 <p className="text-xl text-gray-100 mb-6">Please log in below to access the site</p>
                 <GoogleLogin
                     onSuccess={(credentialResponse) => {
-                        //console.log(jwtDecode(credentialResponse.credential));
+                        // syncAccountDetails(jwtDecode(credentialResponse.credential))
                         LoginFunction(jwtDecode(credentialResponse.credential));
                         handleGoBack();
                     }}
