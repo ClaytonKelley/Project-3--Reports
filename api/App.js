@@ -27,22 +27,12 @@ const dtgConvert = (stringtoconvert) => {
 
 
 //SERVER METRICS
-morgan.token('id', (req) => { //creating id token
+morgan.token('id', (req) => {
   return req.id
 })
 
-
-// //Prevents CORS ERRORS
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   next();
-// });
-
 app.use(morgan(':method :url status::status :response-time ms'))
 app.use(cors())
-
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -62,24 +52,6 @@ app.get('/report_template', (req, res) => {
 
     })
 })
-
-//gets all report data
-// app.get('/report_data', (req, res) => {
-//   knex('report_data')
-//     //.select(knex.raw("report_data.*, to_char(report_data.date AT TIME ZONE 'UTC', 'DDHH24MIMonYYYY') || 'Z' as date"))
-//     .select('*')
-//     .join('satellite_data', 'report_data.satellite_id', 'satellite_data.id')
-//     .join('accounts_data', 'report_data.user_id', 'accounts_data.id')
-//     .orderBy('report_data.date', 'desc')
-//     .then(data => {
-//         res.status(200).json(data)
-//     })
-//     .catch(err => {
-//       res.status(404).send({
-//         message: "No data Found"})
-//     })
-// })
-
 
 
 app.get('/report_data', (req, res) => {
@@ -136,9 +108,6 @@ app.get('/report_data', (req, res) => {
        });
      });
  });
-
-
-
 
 //get all satellite data
 app.get('/satellite', (req, res) => {
@@ -209,14 +178,26 @@ app.get('/report_data/:reportName/', (req, res) => {
     })
 })
 
+
+app.get('/accounts_data/:account', (req, res) => {
+  knex('accounts_data')
+    .select('*')
+    .where('oauth_sub', req.params.account)
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(err => {
+      res.status(404).send({
+        message: "No data Found"})
+    })
+})
+
 //Catch all route
 app.get('/*', (req,res) => {
   res.status(404).send({
     message: 'There was nothing found here. Maybe check your URL?'
   })
 });
-
-
 
 app.post('/accounts_data', (req, res) => {
   const checkBodyDetails = (details) => {
@@ -227,14 +208,14 @@ app.post('/accounts_data', (req, res) => {
     }
   }
   let useraccount = {
-    oauth_sub : req.body.sub,
+    oauth_sub : req.body.oauth_sub,
     username : req.body.userName,
-    rank : checkBodyDetails(req.body.rank),
-    phone : checkBodyDetails(req.body.phone),
+    //rank : checkBodyDetails(req.body.rank),
+    //phone : checkBodyDetails(req.body.phone),
     email : req.body.email,
-    CHOPs :  checkBodyDetails(req.body.chops),
-    unit_id : checkBodyDetails(req.body.unit),
-    user_group_id : req.body.usergroup
+    //chops :  checkBodyDetails(req.body.chops),
+    //unit_id : checkBodyDetails(req.body.unit),
+    user_group_id : req.body.user_group_id
   }
   knex('accounts_data')
     .insert(useraccount)
@@ -243,14 +224,15 @@ app.post('/accounts_data', (req, res) => {
         message : 'account successfully created'
       })
     })
+    .catch(err => {
+      res.status(404).send({
+        message: "account sync failed"})
+    })
 })
 
 
-// app.patch('/accounts_data/:account'), (req, res) => {
-//   knex('account_data')
-//   .where(o_auth_id)
-//   .update(req.body)
-// }
+
+
 
 
 
@@ -262,3 +244,5 @@ app.listen(PORT, () => {
 
 
 //select * from (select * from report_data where unitName ilike %8% or missionNum ilike %*% or  or) where report_name = %req.params.filter%
+
+//app.get('/account_details/:accountid')     find account if not send 404 / if yes send 200 and details
