@@ -8,6 +8,7 @@ import ProfileBuilder from './Components/ProfileBuilder';
 import Profile from './Routes/Profile';
 import Report from './Components/Report';
 import Login from './Components/Login';
+import Globe from './Components/Globe';
 
 function App() {
   const [reportList, setReportList] = React.useState([])
@@ -17,16 +18,23 @@ function App() {
     .then(data => setReportList(data))
   },[])
   return (
-    <ReportContext.Provider value={{reportList}}>
+    <ReportContext.Provider value={{ reportList }}>
+      {/* Globe component as background */}
+      <div className="globe-background">
+        <Globe/>
+      </div>
+      {/* Routes with a container for proper layering and styling */}
+      <div className="routes-container">
         <Routes>
-          <Route path="/" element={<Login/>} />
-          <Route path="/navbar" element={<Navbar/>} />
-          <Route path="/Reportform" element={<Reportform/>} />
-          <Route path="/profilebuild" element={<ProfileBuilder/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/report/:id" element={<Report/>} />
-          
+          <Route path="/" element={<Login />} />
+          <Route path="/navbar" element={<Navbar />} />
+          <Route path="/Reportform" element={<Reportform />} />
+          <Route path="/profilebuild" element={<ProfileBuilder />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/report/:id" element={<Report />} />
+          {/* Other routes as needed */}
         </Routes>
+      </div>
     </ReportContext.Provider>
   );
 }

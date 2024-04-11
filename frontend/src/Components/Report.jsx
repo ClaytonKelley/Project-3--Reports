@@ -17,6 +17,9 @@ export default function Report() {
         X
         </button>
       <div className="bg-gray-800 p-6 rounded-lg shadow-md">
+      <button onClick={() => navigate('/navbar')} className="absolute top-0 right-0 mt-2 mr-2 text-red-500 hover:text-red-700 font-bold text-xl">
+        X
+      </button>
         <div className="mb-4 grid grid-cols-3 gap-4">
           <div>
             <div className="block mb-2 font-bold text-gray-400">
