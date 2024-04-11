@@ -6,9 +6,9 @@ export default function Report() {
   const navigate = useNavigate()
   const {reportList} = React.useContext(ReportContext)
   const {id} = useParams()
-  let report = reportList.find(report => report.id == id)
+  let report = reportList.find(report => report.id === id)
   console.log(id)
-  if(reportList.length == 0){
+  if(reportList.length === 0){
     return(<></>)
   }
   return (
