@@ -59,7 +59,7 @@ export default function Navbar() {
         <div className='flex-grow overflow-y-auto w-full'>
           <ul className='flex flex-col items-center space-y-2 py-2'>
           {reportList.map((report, index) => (
-              <li key={report.id} className='bg-gray-500 rounded-xl w-3/4 h-20 text-center flex justify-center items-center cursor-pointer hover:bg-gray-400' onClick={() => navigate(`/report/${report.id}`)}>
+              <li key={index} className='bg-gray-500 rounded-xl w-3/4 h-20 text-center flex justify-center items-center cursor-pointer hover:bg-gray-400' onClick={() => navigate(`/report/${report.id}`)}>
               <div className="flex flex-col justify-center items-start text-left pl-4"> {/* Adjusted for layout */}
                 {/* Conditionally displaying information based on whether the navbar is expanded or not */}
                 {isExpanded ? (

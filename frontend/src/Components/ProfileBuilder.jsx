@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import ReportContext from './ReportContext'
+
 
 export default function ProfileBuilder() {
   const [form, setForm] = useState({});
+  const {profile} = useContext(ReportContext)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +27,7 @@ export default function ProfileBuilder() {
           {/* User Name Input */}
           <div className="col-span-3">
             <label htmlFor="userName" className="block mb-2 font-bold text-gray-700">
-              User Name:
+              User Name: {profile.userName}
             </label>
             <input
               type="text"
