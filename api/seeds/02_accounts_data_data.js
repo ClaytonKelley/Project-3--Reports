@@ -27,7 +27,7 @@ exports.seed = async function (knex) {
   ]);
   await knex("accounts_data").insert([
     {
-      oauth_sub: 109541936828133743248,
+      oauth_sub: "0912384712390487",
       username: "wghfw",
       rank: "O9",
       phone: 4739203,
@@ -37,7 +37,7 @@ exports.seed = async function (knex) {
       user_group_id: 2,
     },
     {
-      oauth_sub: 213451234,
+      oauth_sub: "109541936",
       username: "adfaq",
       rank: "E5",
       phone: 34111234,

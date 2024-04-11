@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Reportform from "./Components/Reportform";
 import "./App.css";
@@ -10,55 +10,106 @@ import Report from "./Components/Report";
 import Login from "./Components/Login";
 
 function App() {
-  const [reportList, setReportList] = React.useState([]);
-  const [profile, setProfile] = React.useState([]);
-  const [logedin, setLogedin] = React.useState(false);
+  const [reportList, setReportList] = useState([]);
+  const [profile, setProfile] = useState([]);
+  const [logedin, setLogedin] = useState(false);
+  const [shouldNavigate, setShouldNavigate] = useState(null);
+  const navigate = useNavigate();
 
-  function LoginSponsoredByGoogle(creds) {
-    console.log(creds.sub);
-    // let mockUser = {
-    //   oauth_sub: 109541936828133743248,
-    //   username: "wghfw",
-    //   rank: "O9",
-    //   phone: 4739203,
-    //   email: "thewrf@spaceforce.mil",
-    //   chops: "PDE",
-    //   unit_id: 1,
-    //   user_group_id: 2,
-    // };
-    fetch(`http://localhost:8080/account_data/${creds.sub}`).then((res) => {
-      if (res.status === 404) {
-        console.log("post/create/set");
-        //createProfile();
-        //setProfile();
-      } else if (res.status === 201) {
-        let data = res.json();
-        console.log("here is the data from login", data);
-        setProfile(data);
-        setLogedin(true);
+  const handleGoBackNavbar = () => {
+    navigate("/Navbar");
+  };
+
+  const handleGoBackProfile = () => {
+    console.log("navigate");
+    navigate("/profilebuild");
+  };
+
+  useEffect(() => {
+    console.log(1);
+    if (logedin === true && shouldNavigate) {
+      console.log(2);
+      if (shouldNavigate === "profile") {
+        console.log(logedin);
+        console.log(3);
+        handleGoBackProfile();
+      } else if (shouldNavigate === "navbar") {
+        console.log(4);
+        handleGoBackNavbar();
       }
-    });
-    //with mock data
+    }
+  }, [logedin, shouldNavigate]);
+
+  const syncAccountDetails = async (accountDetails) => {
+    const account = {
+      oauth_sub: accountDetails.sub,
+      userName: `${accountDetails.given_name}${
+        accountDetails.family_name
+      }${Math.floor(Math.random() * 1000000)
+        .toString()
+        .padStart(6, "0")}`,
+      email: accountDetails.email,
+      user_group_id: 1,
+    };
+
+    console.log(account);
+    try {
+      const response = await fetch("http://localhost:8080/accounts_data", {
+        method: "POST",
+        body: JSON.stringify(account),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  async function LoginSponsoredByGoogle(creds) {
+    console.log(creds.sub);
+    const response = await fetch(
+      `http://localhost:8080/accounts_data/${creds.sub}`
+    );
+    if (response.status === 404) {
+      syncAccountDetails(creds);
+      console.log(creds);
+      setLogedin(true);
+      setShouldNavigate("profile");
+    } else if (response.status === 201 || response.status === 304) {
+      let data = await response.json();
+      console.log("here is the data from login", data);
+      setProfile(data);
+      setLogedin(true);
+      setShouldNavigate("navbar");
+    }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:8080/report_data")
       .then((raw) => raw.json())
       .then((data) => setReportList(data));
   }, []);
 
   return (
-    <ReportContext.Provider value={{ reportList }}>
+    <ReportContext.Provider value={{ reportList, profile }}>
       <Routes>
         <Route
           path="/"
           element={<Login LoginFunction={LoginSponsoredByGoogle} />}
         />
+        {/* {logedin ? (
+          <> */}
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/Reportform" element={<Reportform />} />
         <Route path="/profilebuild" element={<ProfileBuilder />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/report/:id" element={<Report />} />
+        {/* </>
+        ) : (
+          navigate("/")
+        )} */}
       </Routes>
     </ReportContext.Provider>
   );
