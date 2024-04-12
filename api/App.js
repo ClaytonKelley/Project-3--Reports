@@ -281,6 +281,42 @@ app.patch("/update_account/:account", (req, res) => {
      });
  });
 
+
+ app.post("/report_data", (req, res) => {
+    let ReportData = {
+      report_name: req.body.report_name,
+      unit: req.body.unit,
+      team_name: req.body.team_name,
+      mission_number: req.body.mission_number,
+      tpo: req.body.tpo,
+      ebno: req.body.ebno,
+      ber: req.body.ber,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      pim: req.body.pim,
+      weather: req.body.weather,
+      event: req.body.event,
+      terminal: req.body.terminal,
+      opscap: req.body.opscap,
+      syscap: req.body.syscap,
+      hazcon: req.body.hazcon,
+      comments: req.body.comments,
+      satellite_id: req.body.satellite_id,
+    }
+  knex("report_data")
+    .insert(ReportData)
+    .then(() => {
+      res.status(201).send({
+        message: "Report Successfully submitted",
+      });
+    })
+    .catch((err) => {
+      res.status(404).send({
+        message: "Report Failed",
+      });
+    });
+});
+
 //listener
 app.listen(PORT, () => {
   console.log(`Knex and Express apps are currently running on port ${PORT}`);

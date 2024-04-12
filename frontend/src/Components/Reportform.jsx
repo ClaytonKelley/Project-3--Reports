@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
+import {ReportContext} from './ReportContext'
+import {useNavigate} from "react-router-dom";
+
 
 export default function Reportform() {
   const [form, setForm] = useState({});
-
+  const {profile} = useContext(ReportContext)
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm({
@@ -11,9 +14,52 @@ export default function Reportform() {
     });
   };
 
+  const navigate = useNavigate()
+
   const handleCloseForm = () => {
     window.location.href = '/navbar';
-  }
+  };
+
+
+
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      let ReportData = {
+        report_name: 'WGS 24 Hour Report',
+        unit: form.ORGANIZATION, //organization
+        team_name: form.TEAM, //team
+        mission_number: form.MISSION, //mission
+        tpo: form.tpoInput,
+        ebno: form.ebNoInput,
+        ber: 'N/A',
+        latitude: 'N/A',
+        longitude: 'N/A',
+        pim: 'N/A',
+        weather: form.weatherInput,
+        event:'N/A',
+        terminal: 'N/A',
+        opscap: 'N/A',
+        syscap: 'N/A',
+        hazcon: 'N/A',
+        comments: form.bigInput2,
+        user_id: 1,
+        satellite_id: form.IRON, //This has to be a number input we havent figured this out with drop down and shit yet
+        user_group_id: profile.user_group_id
+      }
+        try {
+          const response = await fetch(`http://localhost:8080/report_data`, {
+            method: "POST",
+            body: JSON.stringify(ReportData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+        navigate("/navbar");
+    };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800 bg-opacity-50 text-white">
@@ -180,11 +226,11 @@ export default function Reportform() {
 
         <div className="mt-4 flex justify-end gap-3"> {/* Container for buttons with margin-top for spacing and flex to align buttons */}
           {/* Submit Button */}
-          <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Submit</button>
+          <button type="submit" onClick={(event) => handleSubmit(event)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Submit</button>
           {/* Cancel Button - Calls handleCloseForm to simulate a cancel action */}
           <button type="button" onClick={handleCloseForm} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Cancel</button>
         </div>
-        
+
       </form>
     </div>
   );

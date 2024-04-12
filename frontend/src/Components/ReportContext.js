@@ -4,7 +4,7 @@ export const ReportContext = createContext();
 
 
 export const ReportProvider = ({ children }) => {
-  const [reportList, setReportList] = useState({})
+  const [reportList, setReportList] = useState([])
   const [profile, setProfile] = useState({});
 
 

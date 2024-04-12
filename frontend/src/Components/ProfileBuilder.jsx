@@ -1,7 +1,7 @@
 import { useState, useContext} from 'react';
 import {ReportContext} from './ReportContext'
 import {GoogleContext} from './GoogleContext'
-import { useNavigate} from 'react-router-dom';
+import {useNavigate } from "react-router-dom";
 
 
 export default function ProfileBuilder() {
@@ -27,7 +27,7 @@ export default function ProfileBuilder() {
 const updateUserData = async(event) => {
   event.preventDefault();
     const userdata = {
-        username: form.username,
+        username: form.userName,
         rank : form.userRank,
         chops: form.userCHOPS,
         unit_id : 1,
@@ -58,13 +58,13 @@ const updateUserData = async(event) => {
           {/* User Name Input */}
           <div className="col-span-3">
             <label htmlFor="userName" className="block mb-2 font-bold text-gray-700">
-              User Name: {profile.username}
+              User Name: {profile.userName}
             </label>
             <input
               type="text"
               id="userName"
               name="userName"
-              value={form.username|| ''}
+              value={form.userName|| ''}
               onChange={handleChange}
               placeholder="Enter user name"
               className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"

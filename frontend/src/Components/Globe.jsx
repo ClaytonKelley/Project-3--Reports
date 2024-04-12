@@ -1,11 +1,13 @@
 
-import React, {Suspense, lazy }from "react";
+import React, {Suspense, lazy, useEffect , useState}from "react";
 import { motion } from "framer-motion";
 import { World } from "./ui/globe.tsx";
 
 const LazyWorld = lazy(() => import('./ui/globe.tsx').then((m) => ({ default: m.World })));
 
 export default function Globe() {
+
+
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -409,12 +411,6 @@ export default function Globe() {
           }}
           className="div"
         >
-          <h2 className="text-center text-xl md:text-4xl font-bold text-black dark:text-white">
-            Global Reports
-          </h2>
-          <p className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
-                Our App is the best
-          </p>
         </motion.div>
         <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
           <World data={sampleArcs} globeConfig={globeConfig} />;

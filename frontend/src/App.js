@@ -11,6 +11,7 @@ import Report from "./Components/Report";
 import Login from "./Components/Login";
 import Globe from './Components/Globe';
 import {GoogleContext} from './Components/GoogleContext'
+import cookie from 'cookie'
 
 
 function App() {
@@ -31,9 +32,11 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(1);
+    //let cookies = cookie.parse(document.cookie);
+    //console.log("here is the cookie",cookies.login)
+    //console.log(1);
     if (logedin === true && shouldNavigate) {
-      console.log(2);
+      //console.log(2);
       if (shouldNavigate === "profile") {
         handleGoBackProfile();
       } else if (shouldNavigate === "navbar") {
@@ -75,9 +78,11 @@ function App() {
       `http://localhost:8080/accounts_data/${creds.sub}`
     );
     if (response.status === 404) {
-      setGoogleCreds(creds)
+      setGoogleCreds(await creds.json())
       console.log(creds)
       syncAccountDetails(creds);
+      document.cookie = 'login=true'
+      //console.log(document.cookie)
       setLogedin(true);
       setShouldNavigate("profile");
     } else if (response.status === 201 || response.status === 304) {
@@ -85,12 +90,14 @@ function App() {
       console.log("here is the data from login", data);
       setGoogleCreds(creds)
       setProfile(data);
+      document.cookie = 'login=true';
+      //console.log(document.cookie);
       setLogedin(true);
       setShouldNavigate("navbar");
     }
   }
 
-  useEffect(() => {
+   useEffect(() => {
     fetch("http://localhost:8080/report_data")
       .then((raw) => raw.json())
       .then((data) => setReportList(data));
@@ -98,32 +105,33 @@ function App() {
 
 
   return (
-    <>
+    <div className='parent-container'>
       {/* Globe component as background */}
-      <div className="globe-background">
+      <div className='globe-background'>
         <Globe/>
       </div>
-      {/* Routes with a container for proper layering and styling */}
+      {/* Routes with a container layering and styling */}
       <div className="routes-container">
        <Routes>
         <Route
           path="/"
           element={<Login LoginFunction={LoginSponsoredByGoogle} />}
         />
-        {/* {logedin ? (
-          <> */}
+        {console.log("here is the cookie", cookie.parse(document.cookie).login)}
+        {cookie.parse(document.cookie).login ? (
+          <>
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/Reportform" element={<Reportform />} />
         <Route path="/profilebuild" element={<ProfileBuilder />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/report/:id" element={<Report />} />
-        {/* </>
+         </>
         ) : (
           navigate("/")
-        )} */}
+        )}
       </Routes>
       </div>
-      </>
+      </div>
 
   );
 }
