@@ -1,13 +1,15 @@
 import React from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
-import ReportContext from './ReportContext'
+import {ReportContext} from './ReportContext'
+
 
 export default function Report() {
   const navigate = useNavigate()
   const {reportList} = React.useContext(ReportContext)
   const {id} = useParams()
-  let report = reportList.find(report => report.id === id)
-  console.log(id)
+  console.log(reportList)
+  let report = reportList.find(report => report.id === Number(id))
+
   if(reportList.length === 0){
     return(<></>)
   }
@@ -23,7 +25,7 @@ export default function Report() {
         <div className="mb-4 grid grid-cols-3 gap-4">
           <div>
             <div className="block mb-2 font-bold text-gray-400">
-              MISSION:<br/>{report.mission_name || 'N/A'}
+              MISSION:<br/>{report.mission_number || 'N/A'}
             </div>
           </div>
           <div>
@@ -45,12 +47,12 @@ export default function Report() {
           </div>
           <div>
             <div className="block mb-2 font-bold text-gray-400">
-              CHOPS:<br/>{report.chops || 'N/A'}
+              CHOPS:<br/>{report.user.chops || 'N/A'}
             </div>
           </div>
           <div>
             <div className="block mb-2 font-bold text-gray-400">
-              IRON:<br/>{report.iron || 'N/A'}
+              IRON:<br/>{report.satellite.iron || 'N/A'}
             </div>
           </div>
         </div>

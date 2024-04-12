@@ -5,8 +5,8 @@ import ThreeGlobe from "three-globe";
 import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import countries from "../../data/globe.json";
-import satImage from './sat.jpg';
-
+import  './sat.jpg'
+const satImage = "./sat.jpg"
 
 
 declare module "@react-three/fiber" {

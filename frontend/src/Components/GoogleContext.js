@@ -1,11 +1,11 @@
 import { createContext, useState} from 'react'; //add useEffect if you need to add a fetch again
 
-export const ReportContext = createContext();
+export const GoogleContext = createContext();
 
 
-export const ReportProvider = ({ children }) => {
-  const [reportList, setReportList] = useState({})
-  const [profile, setProfile] = useState({});
+export const GoogleProvider = ({ children }) => {
+  const [googleCreds, setGoogleCreds] = useState({})
+
 
 
   // useEffect(() => {
@@ -16,12 +16,12 @@ export const ReportProvider = ({ children }) => {
   // }, []);
 
   return (
-     <ReportContext.Provider value={{
-      reportList, setReportList,
-      profile, setProfile
+     <GoogleContext.Provider value={{
+      googleCreds,
+      setGoogleCreds,
       }}>
        {children}
-     </ReportContext.Provider>
+     </GoogleContext.Provider>
 
   );
  };

@@ -1,21 +1,24 @@
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Reportform from "./Components/Reportform";
 import "./App.css";
-import ReportContext from "./Components/ReportContext";
+import {ReportContext} from "./Components/ReportContext";
 import ProfileBuilder from "./Components/ProfileBuilder";
 import Profile from "./Routes/Profile";
 import Report from "./Components/Report";
 import Login from "./Components/Login";
 import Globe from './Components/Globe';
+import {GoogleContext} from './Components/GoogleContext'
+
 
 function App() {
-  const [reportList, setReportList] = useState([]);
-  const [profile, setProfile] = useState([]);
+  const {reportList, setReportList} = useContext(ReportContext);
+  const {profile, setProfile} = useContext(ReportContext);
   const [logedin, setLogedin] = useState(false);
   const [shouldNavigate, setShouldNavigate] = useState(null);
+  const {setGoogleCreds} = useContext(GoogleContext)
   const navigate = useNavigate();
 
   const handleGoBackNavbar = () => {
@@ -32,11 +35,8 @@ function App() {
     if (logedin === true && shouldNavigate) {
       console.log(2);
       if (shouldNavigate === "profile") {
-        console.log(logedin);
-        console.log(3);
         handleGoBackProfile();
       } else if (shouldNavigate === "navbar") {
-        console.log(4);
         handleGoBackNavbar();
       }
     }
@@ -75,13 +75,15 @@ function App() {
       `http://localhost:8080/accounts_data/${creds.sub}`
     );
     if (response.status === 404) {
+      setGoogleCreds(creds)
+      console.log(creds)
       syncAccountDetails(creds);
-      console.log(creds);
       setLogedin(true);
       setShouldNavigate("profile");
     } else if (response.status === 201 || response.status === 304) {
       let data = await response.json();
       console.log("here is the data from login", data);
+      setGoogleCreds(creds)
       setProfile(data);
       setLogedin(true);
       setShouldNavigate("navbar");
@@ -94,9 +96,9 @@ function App() {
       .then((data) => setReportList(data));
   }, []);
 
-  return (
 
-    <ReportContext.Provider value={{ reportList, profile }}> 
+  return (
+    <>
       {/* Globe component as background */}
       <div className="globe-background">
         <Globe/>
@@ -121,7 +123,8 @@ function App() {
         )} */}
       </Routes>
       </div>
-    </ReportContext.Provider>
+      </>
+
   );
 }
 

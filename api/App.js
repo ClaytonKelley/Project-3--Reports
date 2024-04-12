@@ -105,7 +105,7 @@ app.get("/report_data", (req, res) => {
           rank: item.rank,
           phone: item.phone,
           email: item.email,
-          CHOPs: item.CHOPs,
+          chops: item.chops,
         },
         satellite: {
           satellite_name: item.satellite_name,
@@ -260,21 +260,26 @@ app.post("/accounts_data", (req, res) => {
     });
 });
 
-// app.patch("/accounts_data/:account", (req, res) => {
-//   knex("accounts_data")
-//     .select("*")
-//     .where("oauth_sub", req.params.account)
-//     .then((data) => {
+app.patch("/update_account/:account", (req, res) => {
 
-//         res.status(204).json(data);
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(404).send({
-//         message: "No data Found",
-//       });
-//     });
-// });
+  let useraccount = {
+    username: req.body.username,
+    rank : req.body.rank,
+    phone : req.body.phone,
+    chops: req.body.chops,
+    unit_id : req.body.unit_id
+
+  }
+  knex("accounts_data")
+     .where("oauth_sub", req.params.account)
+     .update(useraccount)
+     .then((updatedRows) => {
+         res.status(200).json({ message: "User data updated successfully" });
+       })
+     .catch((err) => {
+       res.status(500).send({ message: "Error updating user data", error: err });
+     });
+ });
 
 //listener
 app.listen(PORT, () => {

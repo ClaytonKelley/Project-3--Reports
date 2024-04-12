@@ -9,6 +9,12 @@ export default function EditableUserProfile() {
     userSquadron: '1 Goth',
   });
 
+
+  //use this profile >
+  // import {ReportContext} from '.ReportContext'
+  // const {profile} = useContext(ReportContext)
+
+
   // Handler for input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +31,7 @@ export default function EditableUserProfile() {
       <div className="bg-white p-6 rounded-lg shadow-md flex justify-center w-3/8">
         {/* Profile Avatar */}
         <img src={profileImage} alt="Profile Avatar" className="rounded-full w-24 h-24 mr-8" />
-        
+
         {/* User Info and Edit Inputs */}
         <div>
           <div className="mb-4">
